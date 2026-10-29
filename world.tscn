@@ -185,18 +185,21 @@ animation = &"idle"
 metadata/_edit_group_ = true
 
 [node name="die" type="AnimatedSprite2D" parent="Player1" unique_id=318935372]
+visible = false
 position = Vector2(190, 486)
 sprite_frames = SubResource("SpriteFrames_lwjuw")
 animation = &"die"
 metadata/_edit_group_ = true
 
 [node name="guard" type="AnimatedSprite2D" parent="Player1" unique_id=923204227]
+visible = false
 position = Vector2(125, 380)
 sprite_frames = SubResource("SpriteFrames_akcvx")
 animation = &"guard"
 metadata/_edit_group_ = true
 
 [node name="hurt" type="AnimatedSprite2D" parent="Player1" unique_id=1792115019]
+visible = false
 position = Vector2(148, 391.00003)
 scale = Vector2(0.38049272, 0.3474967)
 sprite_frames = SubResource("SpriteFrames_xwlem")
@@ -204,13 +207,15 @@ animation = &"hurt"
 metadata/_edit_group_ = true
 
 [node name="charge" type="AnimatedSprite2D" parent="Player1" unique_id=496977868]
-position = Vector2(111, 356)
-scale = Vector2(0.84873956, 0.8377725)
+visible = false
+position = Vector2(108.50001, 331)
+scale = Vector2(0.869748, 0.9588378)
 sprite_frames = SubResource("SpriteFrames_k3xxl")
 animation = &"charge"
 metadata/_edit_group_ = true
 
 [node name="pa" type="AnimatedSprite2D" parent="Player1" unique_id=811723220]
+visible = false
 position = Vector2(305.5021, 384.66467)
 scale = Vector2(0.87664586, 1.085553)
 sprite_frames = SubResource("SpriteFrames_3lw3p")
@@ -218,6 +223,7 @@ animation = &"pa"
 metadata/_edit_group_ = true
 
 [node name="punch" type="AnimatedSprite2D" parent="Player1" unique_id=617740014]
+visible = false
 position = Vector2(480.00003, 377.00003)
 scale = Vector2(0.8934608, 1.1454781)
 sprite_frames = SubResource("SpriteFrames_vp8q2")
@@ -228,13 +234,14 @@ metadata/_edit_group_ = true
 script = ExtResource("1_f3sb7")
 
 [node name="idle" type="AnimatedSprite2D" parent="Player2" unique_id=732813471]
-position = Vector2(1060.5625, 374.625)
-scale = Vector2(0.2621499, 0.19152953)
+position = Vector2(1060.5625, 358.625)
+scale = Vector2(0.2621499, 0.21347739)
 sprite_frames = SubResource("SpriteFrames_8ynm2")
 animation = &"idle"
 metadata/_edit_group_ = true
 
 [node name="die" type="AnimatedSprite2D" parent="Player2" unique_id=115945444]
+visible = false
 position = Vector2(959.00006, 476)
 scale = Vector2(1.0798234, 0.96635324)
 sprite_frames = SubResource("SpriteFrames_256ea")
@@ -242,6 +249,7 @@ animation = &"die"
 metadata/_edit_group_ = true
 
 [node name="guard" type="AnimatedSprite2D" parent="Player2" unique_id=730163773]
+visible = false
 position = Vector2(1054, 382)
 scale = Vector2(0.73317367, 0.97623813)
 sprite_frames = SubResource("SpriteFrames_tdgh7")
@@ -249,6 +257,7 @@ animation = &"guard"
 metadata/_edit_group_ = true
 
 [node name="hurt" type="AnimatedSprite2D" parent="Player2" unique_id=220114641]
+visible = false
 position = Vector2(1036.0001, 370)
 scale = Vector2(0.3182178, 0.42488775)
 sprite_frames = SubResource("SpriteFrames_02q6e")
@@ -256,13 +265,15 @@ animation = &"hurt"
 metadata/_edit_group_ = true
 
 [node name="charge" type="AnimatedSprite2D" parent="Player2" unique_id=1471796544]
-position = Vector2(1058.6617, 346)
-scale = Vector2(0.94372743, 0.8558623)
+visible = false
+position = Vector2(1058.6617, 321.3002)
+scale = Vector2(0.94372743, 0.9790534)
 sprite_frames = SubResource("SpriteFrames_5w2vj")
 animation = &"charge"
 metadata/_edit_group_ = true
 
 [node name="pa" type="AnimatedSprite2D" parent="Player2" unique_id=445495708]
+visible = false
 position = Vector2(868, 384)
 scale = Vector2(0.78969955, 1.1503416)
 sprite_frames = SubResource("SpriteFrames_pnra0")
@@ -270,6 +281,7 @@ animation = &"pa"
 metadata/_edit_group_ = true
 
 [node name="punch" type="AnimatedSprite2D" parent="Player2" unique_id=145043942]
+visible = false
 position = Vector2(706.11505, 379.40356)
 scale = Vector2(0.8683457, 1.1573403)
 sprite_frames = SubResource("SpriteFrames_3tf2g")

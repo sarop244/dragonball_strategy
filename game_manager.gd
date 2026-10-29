@@ -54,6 +54,7 @@ func process_turn(p1_act: Action, p2_act: Action) -> void:
 	}
 	
 	turn_processed.emit(result)
+	
 func receive_player_action(action: Action) -> void:
 	if current_input_player == 1:
 		p1_action = action
