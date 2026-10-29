@@ -1,0 +1,120 @@
+[gd_scene format=3 uid="uid://dxjyjf1xncm4l"]
+
+[ext_resource type="Script" uid="uid://dshghah3nvwme" path="res://game_ui.gd" id="1_ue6oa"]
+[ext_resource type="Texture2D" uid="uid://jq1h2hvepxa6" path="res://Pic/기모으기.png" id="2_obik5"]
+[ext_resource type="Texture2D" uid="uid://dquiy8eyi2vju" path="res://Pic/막기.png" id="3_xlnb1"]
+[ext_resource type="Texture2D" uid="uid://dit0qp1ypxavy" path="res://Pic/주먹.png" id="4_vealc"]
+[ext_resource type="Texture2D" uid="uid://cyeuaceb66x27" path="res://Pic/에너지파.png" id="5_ltg2s"]
+
+[node name="GameUI" type="CanvasLayer" unique_id=1145796835]
+script = ExtResource("1_ue6oa")
+
+[node name="P1_Panel" type="Control" parent="." unique_id=1282469435]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -1.0
+offset_top = 2.0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="KiLabel" type="Label" parent="P1_Panel" unique_id=1798481643]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 58.0
+offset_right = 116.0
+offset_bottom = 81.0
+text = "플레이어 1"
+
+[node name="HpLabel" type="Label" parent="P1_Panel" unique_id=2017443494]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 3.0
+offset_top = 125.0
+offset_right = 43.0
+offset_bottom = 148.0
+text = "1"
+
+[node name="charge" type="Button" parent="P1_Panel" unique_id=570013890]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 530.0
+offset_right = 115.0
+offset_bottom = 641.0
+icon = ExtResource("2_obik5")
+
+[node name="guard" type="Button" parent="P1_Panel" unique_id=1865513853]
+layout_mode = 0
+offset_left = 382.0
+offset_top = 530.0
+offset_right = 492.0
+offset_bottom = 641.0
+icon = ExtResource("3_xlnb1")
+
+[node name="punch" type="Button" parent="P1_Panel" unique_id=1207940783]
+layout_mode = 0
+offset_left = 561.0
+offset_top = 533.0
+offset_right = 672.0
+offset_bottom = 644.0
+icon = ExtResource("4_vealc")
+
+[node name="pa" type="Button" parent="P1_Panel" unique_id=1850714174]
+layout_mode = 0
+offset_left = 187.0
+offset_top = 529.0
+offset_right = 304.0
+offset_bottom = 644.0
+icon = ExtResource("5_ltg2s")
+
+[node name="P2_Panel" type="Control" parent="." unique_id=1874409525]
+layout_mode = 3
+offset_left = 10.0
+offset_top = 99.0
+offset_right = 50.0
+offset_bottom = 139.0
+
+[node name="KiLabel" type="Label" parent="P2_Panel" unique_id=64573696]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 2.0170002
+anchor_right = 2.0170002
+offset_left = 956.32
+offset_top = -41.0
+offset_right = 1037.32
+offset_bottom = -12.0
+text = "플레이어 2"
+
+[node name="HpLabel" type="Label" parent="P2_Panel" unique_id=1755683477]
+layout_mode = 0
+offset_left = 1042.0
+offset_top = 22.0
+offset_right = 1108.0
+offset_bottom = 45.0
+text = "1"
+
+[node name="ActionButtons" type="Button" parent="P2_Panel" unique_id=711850545]
+layout_mode = 0
+offset_left = 28.0
+offset_top = -88.0
+offset_right = 97.0
+offset_bottom = -44.0
+
+[node name="StatusLabel" type="Label" parent="." unique_id=1747686033]
+offset_left = 370.0
+offset_top = 23.0
+offset_right = 576.0
+offset_bottom = 46.0
+text = "상태"
+horizontal_alignment = 1
+
+[node name="Restart" type="Button" parent="." unique_id=76083729]
+offset_left = 403.0
+offset_top = 76.0
+offset_right = 529.0
+offset_bottom = 172.0
+
+[connection signal="pressed" from="P1_Panel/charge" to="." method="_on_charge_pressed"]
+[connection signal="pressed" from="P1_Panel/guard" to="." method="_on_guard_pressed"]
+[connection signal="pressed" from="P1_Panel/punch" to="." method="_on_punch_pressed"]
+[connection signal="pressed" from="P1_Panel/pa" to="." method="_on_pa_pressed"]
+[connection signal="pressed" from="Restart" to="." method="_on_restart_pressed"]

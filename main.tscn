@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://rde033fl1meo"]
+
+[ext_resource type="Script" uid="uid://bk8nt7kod6few" path="res://Main.gd" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://kb8pauat0op6" path="res://world.tscn" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://dxjyjf1xncm4l" path="res://game_ui.tscn" id="3_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://bl6jkle28cr64" path="res://game_manager.tscn" id="4_1bvp3"]
+
+[node name="Main" type="Node2D" unique_id=2018218906]
+script = ExtResource("1_ig7tw")
+
+[node name="World" parent="." unique_id=1882868298 instance=ExtResource("2_h2yge")]
+position = Vector2(3, 1)
+
+[node name="GameUI" parent="." unique_id=1145796835 instance=ExtResource("3_1bvp3")]
+
+[node name="GameManager" parent="." unique_id=172406369 instance=ExtResource("4_1bvp3")]
+
+[connection signal="charge_pressed" from="GameUI" to="." method="_on_game_ui_charge_pressed"]
+[connection signal="guard_pressed" from="GameUI" to="." method="_on_game_ui_guard_pressed"]
+[connection signal="pa_pressed" from="GameUI" to="." method="_on_game_ui_pa_pressed"]
+[connection signal="punch_pressed" from="GameUI" to="." method="_on_game_ui_punch_pressed"]
+[connection signal="restart_pressed" from="GameUI" to="." method="_on_game_ui_restart_pressed"]
+[connection signal="turn_requested" from="GameUI" to="." method="_on_game_ui_turn_requested"]
