@@ -121,3 +121,4 @@ text = "재시작"
 [connection signal="pressed" from="P1_Panel/guard" to="." method="_on_guard_pressed"]
 [connection signal="pressed" from="P1_Panel/punch" to="." method="_on_punch_pressed"]
 [connection signal="pressed" from="P1_Panel/pa" to="." method="_on_pa_pressed"]
+[connection signal="pressed" from="Restart" to="." method="_on_restart_pressed"]

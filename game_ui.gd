@@ -1,7 +1,7 @@
 class_name GameUI
 extends CanvasLayer
 
-signal turn_requested(p1_act: GameManager.Action, p2_act: GameManager.Action)
+#signal turn_requested(p1_act: GameManager.Action, p2_act: GameManager.Action)
 signal charge_pressed()
 signal guard_pressed()
 signal punch_pressed()
@@ -19,8 +19,8 @@ var p2_selected: GameManager.Action = GameManager.Action.NONE
 
 
 func _ready() -> void:
-	$Restart.pressed.connect(_on_execute_pressed)
-
+	#$Restart.pressed.connect(_on_execute_pressed)
+	pass
 # 버튼 클릭 시 호출
 func select_p1_action(act: GameManager.Action) -> void:
 	p1_selected = act
@@ -30,14 +30,16 @@ func select_p2_action(act: GameManager.Action) -> void:
 	p2_selected = act
 	update_status_text()
 
-func _on_execute_pressed() -> void:
-	#if p1_selected == GameManager.Action.NONE or p2_selected == GameManager.Action.NONE:
-		#status_label.text = "양쪽 다 행동을 선택해야 합니다!"
-		#return
-	
-	turn_requested.emit(p1_selected, p2_selected)
-	p1_selected = GameManager.Action.NONE
-	p2_selected = GameManager.Action.NONE
+
+
+#func _on_execute_pressed() -> void:
+	##if p1_selected == GameManager.Action.NONE or p2_selected == GameManager.Action.NONE:
+		##status_label.text = "양쪽 다 행동을 선택해야 합니다!"
+		##return
+	#
+	#turn_requested.emit(p1_selected, p2_selected)
+	#p1_selected = GameManager.Action.NONE
+	#p2_selected = GameManager.Action.NONE
 
 func update_status_text() -> void:
 	status_label.text = "1P: %s / 2P: %s 선택 중..." % [

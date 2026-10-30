@@ -26,10 +26,10 @@ func _on_game_ui_restart_pressed() -> void:
 	get_tree().reload_current_scene()
 
 
-func _on_game_ui_turn_requested(p1_act: GameManager.Action, p2_act: GameManager.Action) -> void:
-	# 1. UI 업데이트
-	print("이거나오긴해?")
-	game_manager.process_turn(p1_act, p2_act)
+#func _on_game_ui_turn_requested(p1_act: GameManager.Action, p2_act: GameManager.Action) -> void:
+	## 1. UI 업데이트
+	#print("이거나오긴해?")
+	#game_manager.process_turn(p1_act, p2_act)
 
 
 func _on_game_manager_turn_processed(result_data: Dictionary) -> void:
