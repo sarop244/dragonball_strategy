@@ -2,11 +2,11 @@ class_name GameUI
 extends CanvasLayer
 
 signal turn_requested(p1_act: GameManager.Action, p2_act: GameManager.Action)
-signal charge_pressed(player_id: int)
-signal guard_pressed(player_id: int)
-signal punch_pressed(player_id: int)
-signal pa_pressed(player_id: int)
-signal restart_pressed(int)
+signal charge_pressed()
+signal guard_pressed()
+signal punch_pressed()
+signal pa_pressed()
+signal restart_pressed()
 
 var p1_selected: GameManager.Action = GameManager.Action.NONE
 var p2_selected: GameManager.Action = GameManager.Action.NONE
@@ -31,9 +31,9 @@ func select_p2_action(act: GameManager.Action) -> void:
 	update_status_text()
 
 func _on_execute_pressed() -> void:
-	if p1_selected == GameManager.Action.NONE or p2_selected == GameManager.Action.NONE:
-		status_label.text = "양쪽 다 행동을 선택해야 합니다!"
-		return
+	#if p1_selected == GameManager.Action.NONE or p2_selected == GameManager.Action.NONE:
+		#status_label.text = "양쪽 다 행동을 선택해야 합니다!"
+		#return
 	
 	turn_requested.emit(p1_selected, p2_selected)
 	p1_selected = GameManager.Action.NONE
@@ -50,7 +50,8 @@ func display_result(data: Dictionary) -> void:
 	p1_hp_label.text = "누적피해: " + str(data.p1_damage) + "/4"
 	p2_ki_label.text = "기2: " + str(data.p2_ki)
 	p2_hp_label.text = "누적피해: " + str(data.p2_damage) + "/4"
-	
+	if data.p1_dead or data.p2_dead:
+		$Restart.disabled = false
 	if data.p1_dead and data.p2_dead:
 		status_label.text = "💀 무승부!"
 	elif data.p1_dead:
@@ -61,13 +62,12 @@ func display_result(data: Dictionary) -> void:
 		status_label.text = "턴 완료!"
 
 func _on_charge_pressed() -> void:		#차지버튼 눌렀을때
-	emit_signal("charge_pressed",1)		#시그널보내기 메인한테
+	charge_pressed.emit()
 func _on_guard_pressed() -> void:
-	emit_signal("guard_pressed",1)
+	guard_pressed.emit()
 func _on_punch_pressed() -> void:
-	emit_signal("punch_pressed",1)
+	punch_pressed.emit()
 func _on_pa_pressed() -> void:
-	emit_signal("pa_pressed",1)
-
+	pa_pressed.emit()
 func _on_restart_pressed() -> void:
-	emit_signal("restart_pressed",1)
+	restart_pressed.emit()

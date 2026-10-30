@@ -68,6 +68,7 @@ icon = ExtResource("5_ltg2s")
 
 [node name="P2_Panel" type="Control" parent="." unique_id=1874409525]
 layout_mode = 3
+anchors_preset = 0
 offset_left = 10.0
 offset_top = 99.0
 offset_right = 50.0
@@ -108,13 +109,15 @@ text = "상태"
 horizontal_alignment = 1
 
 [node name="Restart" type="Button" parent="." unique_id=76083729]
-offset_left = 403.0
+offset_left = 431.0
 offset_top = 76.0
-offset_right = 529.0
-offset_bottom = 172.0
+offset_right = 518.0
+offset_bottom = 141.0
+theme_override_font_sizes/font_size = 22
+disabled = true
+text = "재시작"
 
 [connection signal="pressed" from="P1_Panel/charge" to="." method="_on_charge_pressed"]
 [connection signal="pressed" from="P1_Panel/guard" to="." method="_on_guard_pressed"]
 [connection signal="pressed" from="P1_Panel/punch" to="." method="_on_punch_pressed"]
 [connection signal="pressed" from="P1_Panel/pa" to="." method="_on_pa_pressed"]
-[connection signal="pressed" from="Restart" to="." method="_on_restart_pressed"]

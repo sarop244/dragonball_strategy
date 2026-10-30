@@ -14,8 +14,12 @@ var current_input_player: int = 1
 var p1_action: Action = Action.NONE
 var p2_action: Action = Action.NONE
 
+# ➕ [추가] 게임이 끝났는지 확인하는 변수
+var is_game_over: bool = false
+
 # 턴 결과 반환용 시그널
 signal turn_processed(result_data: Dictionary)
+signal dead_restart()
 # 턴 연산 함수
 func process_turn(p1_act: Action, p2_act: Action) -> void:
 	# 1. 자원 검증
@@ -38,15 +42,11 @@ func process_turn(p1_act: Action, p2_act: Action) -> void:
 	if p1_damage >= 4: p1_dead = true
 	if p2_damage >= 4: p2_dead = true
 	
-	#update_ki(1, p1_act)
-	#update_ki(2, p2_act)
-	
-	#var result = {
-		#"p1_act": p1_act, "p2_act": p2_act,
-		#"p1_ki": p1_ki, "p2_ki": p2_ki
-	#}
-	#turn_processed.emit(result)
-	## 결과를 딕셔너리로 패킹하여 시그널로 전달
+	if p1_dead or p2_dead:		# 죽었을경우 게임오버
+		dead_restart.emit()
+		is_game_over = true
+
+	# 결과를 딕셔너리로 패킹하여 시그널로 전달
 	var result = {
 		"p1_act": p1_act, "p2_act": p2_act,
 		"p1_ki": p1_ki, "p1_damage": p1_damage, "p1_dead": p1_dead,
@@ -56,6 +56,10 @@ func process_turn(p1_act: Action, p2_act: Action) -> void:
 	turn_processed.emit(result)
 	
 func receive_player_action(action: Action) -> void:
+	# 누적 피해가 4 이상이면(죽었으면) 입력 차단!
+	if is_game_over:
+		return
+		
 	if current_input_player == 1:
 		p1_action = action
 		print("1P 입력 완료: ", action)
