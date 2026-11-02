@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://kb8pauat0op6" path="res://world.tscn" id="2_h2yge"]
 [ext_resource type="PackedScene" uid="uid://dxjyjf1xncm4l" path="res://game_ui.tscn" id="3_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://bl6jkle28cr64" path="res://game_manager.tscn" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://bvv0kpw6cbivq" path="res://startmenu.tscn" id="5_lquwl"]
 
 [node name="Main" type="Node2D" unique_id=2018218906]
 script = ExtResource("1_ig7tw")
@@ -15,6 +16,8 @@ position = Vector2(3, 1)
 
 [node name="GameManager" parent="." unique_id=172406369 instance=ExtResource("4_1bvp3")]
 
+[node name="StartMenu" parent="." unique_id=2015511402 instance=ExtResource("5_lquwl")]
+
 [connection signal="charge_pressed" from="GameUI" to="." method="_on_game_ui_charge_pressed"]
 [connection signal="guard_pressed" from="GameUI" to="." method="_on_game_ui_guard_pressed"]
 [connection signal="pa_pressed" from="GameUI" to="." method="_on_game_ui_pa_pressed"]
@@ -22,3 +25,4 @@ position = Vector2(3, 1)
 [connection signal="restart_pressed" from="GameUI" to="." method="_on_game_ui_restart_pressed"]
 [connection signal="ult_pressed" from="GameUI" to="." method="_on_game_ui_ult_pressed"]
 [connection signal="turn_processed" from="GameManager" to="." method="_on_game_manager_turn_processed"]
+[connection signal="mode_selected" from="StartMenu" to="." method="_on_start_menu_mode_selected"]

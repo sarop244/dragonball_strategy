@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://bvv0kpw6cbivq"]
+
+[ext_resource type="Script" uid="uid://cpsesqne4hmba" path="res://startmenu.gd" id="1_ynf42"]
+[ext_resource type="Texture2D" uid="uid://bemhgrmuxn1ov" path="res://Pic/1인용.png" id="2_vv751"]
+[ext_resource type="Texture2D" uid="uid://cau4gfjqud5f3" path="res://Pic/2인용.png" id="3_kpj2f"]
+
+[node name="StartMenu" type="CanvasLayer" unique_id=2015511402]
+script = ExtResource("1_ynf42")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1522400267]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.10980392, 0.10980392, 0.10980392, 1)
+
+[node name="1Player" type="Button" parent="." unique_id=633146166]
+offset_left = 400.0
+offset_top = 100.0
+offset_right = 2194.0
+offset_bottom = 1001.0
+scale = Vector2(0.2, 0.2)
+icon = ExtResource("2_vv751")
+
+[node name="2Player" type="Button" parent="." unique_id=812756148]
+offset_left = 400.0
+offset_top = 350.0
+offset_right = 2194.0
+offset_bottom = 1251.0
+scale = Vector2(0.2, 0.2)
+icon = ExtResource("3_kpj2f")
+
+[connection signal="pressed" from="1Player" to="." method="_on_single_btn_pressed"]
+[connection signal="pressed" from="2Player" to="." method="_on_multi_btn_pressed"]

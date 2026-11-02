@@ -7,7 +7,10 @@ extends Node2D
 
 
 func _ready() -> void:
-	pass	
+	# 시작 메뉴 생성 및 모드 선택 대기
+	var start_menu = preload("res://StartMenu.tscn").instantiate()
+	#add_child(start_menu)
+	#start_menu.mode_selected.connect(_on_start_menu_mode_selected)
 	
 func _on_game_ui_charge_pressed() -> void:
 	# GameManager 함수 호출
@@ -34,13 +37,6 @@ func _on_game_ui_ult_pressed() -> void:
 func _on_game_ui_restart_pressed() -> void:
 	get_tree().reload_current_scene()
 
-
-#func _on_game_ui_turn_requested(p1_act: GameManager.Action, p2_act: GameManager.Action) -> void:
-	## 1. UI 업데이트
-	#print("이거나오긴해?")
-	#game_manager.process_turn(p1_act, p2_act)
-
-
 func _on_game_manager_turn_processed(result_data: Dictionary) -> void:
 	# 1. UI 업데이트
 	ui.display_result(result_data)
@@ -55,5 +51,11 @@ func _on_game_manager_turn_processed(result_data: Dictionary) -> void:
 		p1.play_dead_anim()
 	if result_data.p2_dead: 
 		p2.play_dead_anim()
-		
-		
+
+func _on_start_menu_mode_selected(is_multi: bool) -> void:
+	game_manager.is_multiplayer = is_multi
+	if is_multi:
+		print("2인용 멀티모드 시작 (네트워크 대기)")
+		# 추후 네트워크 서버/클라이언트 연결 로직이 여기에 들어갑니다.
+	else:
+		print("1인용 한 컴퓨터 대전 시작")

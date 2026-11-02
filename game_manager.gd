@@ -3,6 +3,9 @@ extends Node
 
 enum Action { NONE, CHARGE, PA, GUARD, PUNCH, KAMEHAMEHA }
 
+# false면 한 컴퓨터 2인용, true면 멀티
+var is_multiplayer: bool = false 
+
 # 플레이어 상태 데이터
 var p1_ki: int = 0
 var p1_damage: int = 0
