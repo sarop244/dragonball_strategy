@@ -20,4 +20,5 @@ position = Vector2(3, 1)
 [connection signal="pa_pressed" from="GameUI" to="." method="_on_game_ui_pa_pressed"]
 [connection signal="punch_pressed" from="GameUI" to="." method="_on_game_ui_punch_pressed"]
 [connection signal="restart_pressed" from="GameUI" to="." method="_on_game_ui_restart_pressed"]
+[connection signal="ult_pressed" from="GameUI" to="." method="_on_game_ui_ult_pressed"]
 [connection signal="turn_processed" from="GameManager" to="." method="_on_game_manager_turn_processed"]

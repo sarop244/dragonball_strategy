@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dquiy8eyi2vju" path="res://Pic/막기.png" id="3_xlnb1"]
 [ext_resource type="Texture2D" uid="uid://dit0qp1ypxavy" path="res://Pic/주먹.png" id="4_vealc"]
 [ext_resource type="Texture2D" uid="uid://cyeuaceb66x27" path="res://Pic/에너지파.png" id="5_ltg2s"]
+[ext_resource type="Texture2D" uid="uid://bt720urri2ogq" path="res://Pic/에네르기파.png" id="6_xlnb1"]
 
 [node name="GameUI" type="CanvasLayer" unique_id=1145796835]
 script = ExtResource("1_ue6oa")
@@ -40,31 +41,45 @@ offset_left = 5.0
 offset_top = 530.0
 offset_right = 115.0
 offset_bottom = 641.0
+scale = Vector2(0.05, 0.05)
 icon = ExtResource("2_obik5")
 
 [node name="guard" type="Button" parent="P1_Panel" unique_id=1865513853]
 layout_mode = 0
-offset_left = 382.0
+offset_left = 400.0
 offset_top = 530.0
-offset_right = 492.0
-offset_bottom = 641.0
+offset_right = 2456.0
+offset_bottom = 2586.0
+scale = Vector2(0.05, 0.05)
 icon = ExtResource("3_xlnb1")
 
 [node name="punch" type="Button" parent="P1_Panel" unique_id=1207940783]
 layout_mode = 0
-offset_left = 561.0
-offset_top = 533.0
-offset_right = 672.0
-offset_bottom = 644.0
+offset_left = 600.0
+offset_top = 530.0
+offset_right = 2656.0
+offset_bottom = 2586.0
+scale = Vector2(0.05, 0.05)
 icon = ExtResource("4_vealc")
 
 [node name="pa" type="Button" parent="P1_Panel" unique_id=1850714174]
 layout_mode = 0
-offset_left = 187.0
-offset_top = 529.0
-offset_right = 304.0
-offset_bottom = 644.0
+offset_left = 200.0
+offset_top = 530.0
+offset_right = 2256.0
+offset_bottom = 2586.0
+scale = Vector2(0.05, 0.05)
 icon = ExtResource("5_ltg2s")
+
+[node name="ult" type="Button" parent="P1_Panel" unique_id=1745238745]
+visible = false
+layout_mode = 0
+offset_left = 200.0
+offset_top = 530.0
+offset_right = 2256.0
+offset_bottom = 2586.0
+scale = Vector2(0.05, 0.05)
+icon = ExtResource("6_xlnb1")
 
 [node name="P2_Panel" type="Control" parent="." unique_id=1874409525]
 layout_mode = 3
@@ -121,4 +136,5 @@ text = "재시작"
 [connection signal="pressed" from="P1_Panel/guard" to="." method="_on_guard_pressed"]
 [connection signal="pressed" from="P1_Panel/punch" to="." method="_on_punch_pressed"]
 [connection signal="pressed" from="P1_Panel/pa" to="." method="_on_pa_pressed"]
+[connection signal="pressed" from="P1_Panel/ult" to="." method="_on_ult_pressed"]
 [connection signal="pressed" from="Restart" to="." method="_on_restart_pressed"]

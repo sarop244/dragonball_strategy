@@ -20,8 +20,17 @@ func _on_game_ui_punch_pressed() -> void:
 	game_manager.receive_player_action(game_manager.Action.PUNCH)
 	print("주먹")
 func _on_game_ui_pa_pressed() -> void:
-	game_manager.receive_player_action(game_manager.Action.PA)
-	print("파")
+	#if game_manager.p1_ki >=3 or game_manager.p2_ki >=3:			#기 3개모였을떄 에네르기파 사용
+		#game_manager.receive_player_action(game_manager.Action.KAMEHAMEHA)
+	if game_manager.p1_ki >0 or game_manager.p2_ki > 0 :
+		game_manager.receive_player_action(game_manager.Action.PA)
+		print("파")
+	else:
+		ui.status_label.text ="'기'가 부족합니다!! 다른행동을 해주세요"
+		return
+func _on_game_ui_ult_pressed() -> void:
+	game_manager.receive_player_action(game_manager.Action.KAMEHAMEHA)
+
 func _on_game_ui_restart_pressed() -> void:
 	get_tree().reload_current_scene()
 

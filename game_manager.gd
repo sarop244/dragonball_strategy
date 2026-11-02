@@ -34,12 +34,16 @@ func process_turn(p1_act: Action, p2_act: Action) -> void:
 	var p1_dead: bool = check_death(p1_act, p2_act)
 	var p2_dead: bool = check_death(p2_act, p1_act)
 
-	if p2_act == Action.PUNCH and p1_act != Action.GUARD:
+	if p2_act == Action.PUNCH and p1_act != Action.GUARD:	#펀치 누적
 		p1_damage += 1
 	if p1_act == Action.PUNCH and p2_act != Action.GUARD:
 		p2_damage += 1
-
-	if p1_damage >= 4: p1_dead = true
+		
+	if p1_damage == 4 and p2_damage ==4:			# 펀치 동타 사망
+		p1_damage =0
+		p2_damage =0
+		
+	if p1_damage >= 4: p1_dead = true				# 펀치 4회누적 사망
 	if p2_damage >= 4: p2_dead = true
 	
 	if p1_dead or p2_dead:		# 죽었을경우 게임오버
@@ -78,8 +82,12 @@ func receive_player_action(action: Action) -> void:
 		p2_action = Action.NONE
 
 func validate_action(act: Action, ki: int) -> Action:
-	if act == Action.KAMEHAMEHA and ki < 3: return Action.PA if ki >= 1 else Action.CHARGE
-	if act == Action.PA and ki < 1: return Action.CHARGE
+	if act == Action.KAMEHAMEHA and ki < 3 and ki >0:
+		return Action.PA 
+		
+		# 파(1 필요)를 쓰는데 기가 1 미만이면 사용 불가 (NONE 처리)
+	if act == Action.PA and ki < 1:
+		return Action.NONE
 	return act
 
 func update_ki(player: int, act: Action) -> void:
@@ -92,6 +100,8 @@ func update_ki(player: int, act: Action) -> void:
 	else: p2_ki += change
 
 func check_death(my_act: Action, opp_act: Action) -> bool:
+	if opp_act == Action.PA and my_act == Action.PA: return false
+	if opp_act == Action.KAMEHAMEHA and my_act == Action.KAMEHAMEHA: return false
 	if opp_act == Action.KAMEHAMEHA: return true
 	if opp_act == Action.PA and my_act != Action.GUARD: return true
 	return false

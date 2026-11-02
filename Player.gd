@@ -9,7 +9,8 @@ extends Node2D
 	"hurt": $hurt,
 	"die": $die,
 	"pa": $pa,
-	"punch": $punch
+	"punch": $punch,
+	"ult" : $ult
 }
 func show_only(target_name: String) -> void:		# 버튼누를때 사진바뀌게 이외에는 off
 	for key in sprites:
@@ -25,8 +26,10 @@ func play_action_anim(action: GameManager.Action) -> void:
 			show_only("guard")
 		GameManager.Action.PUNCH:
 			show_only("punch")
-		GameManager.Action.PA, GameManager.Action.KAMEHAMEHA:
+		GameManager.Action.PA:
 			show_only("pa")
+		GameManager.Action.KAMEHAMEHA:
+			show_only("ult")
 		_:
 			show_only("idle")
 

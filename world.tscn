@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://2fnumhrc2vos" path="res://Pic/기본1.png" id="6_ikiii"]
 [ext_resource type="Texture2D" uid="uid://bc72xu4qscxa3" path="res://Pic/펀치1.png" id="7_cbp6q"]
 [ext_resource type="Texture2D" uid="uid://o8g0o4tnb51e" path="res://Pic/파1.png" id="8_26xuy"]
+[ext_resource type="Texture2D" uid="uid://dvssqytbsaers" path="res://Pic/에네르기파 1.png" id="8_hiqwa"]
 [ext_resource type="Texture2D" uid="uid://cwml6o2mr5w4c" path="res://Pic/아2.png" id="9_bc84e"]
 [ext_resource type="Texture2D" uid="uid://dhrydjw8mietm" path="res://Pic/기본2.png" id="9_hiqwa"]
 [ext_resource type="Texture2D" uid="uid://beuy7adlvdjbq" path="res://Pic/다이2.png" id="10_wukud"]
@@ -15,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://cgvrrojdr2cwm" path="res://Pic/부상2.png" id="12_wjb0r"]
 [ext_resource type="Texture2D" uid="uid://mju2wtabfap2" path="res://Pic/펀치2.png" id="13_mc2jv"]
 [ext_resource type="Texture2D" uid="uid://dhd3dbjmgs112" path="res://Pic/파2.png" id="14_bo7i5"]
+[ext_resource type="Texture2D" uid="uid://bt8eue883t8c0" path="res://Pic/에네르기파 2.png" id="15_2u3nc"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2hk21"]
 animations = [{
@@ -82,7 +84,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_vp8q2"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_ltg2s"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -90,6 +92,17 @@ animations = [{
 }],
 "loop": 1,
 "name": &"punch",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vp8q2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_hiqwa")
+}],
+"loop": 1,
+"name": &"ult",
 "speed": 5.0
 }]
 
@@ -159,7 +172,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_3tf2g"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_vealc"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -167,6 +180,17 @@ animations = [{
 }],
 "loop": 1,
 "name": &"punch",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xlnb1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_2u3nc")
+}],
+"loop": 1,
+"name": &"ult",
 "speed": 5.0
 }]
 
@@ -226,8 +250,16 @@ metadata/_edit_group_ = true
 visible = false
 position = Vector2(480.00003, 377.00003)
 scale = Vector2(0.8934608, 1.1454781)
-sprite_frames = SubResource("SpriteFrames_vp8q2")
+sprite_frames = SubResource("SpriteFrames_ltg2s")
 animation = &"punch"
+metadata/_edit_group_ = true
+
+[node name="ult" type="AnimatedSprite2D" parent="Player1" unique_id=374263569]
+visible = false
+position = Vector2(321.49008, 359.26324)
+scale = Vector2(0.18473649, 0.2691613)
+sprite_frames = SubResource("SpriteFrames_vp8q2")
+animation = &"ult"
 metadata/_edit_group_ = true
 
 [node name="Player2" type="Node2D" parent="." unique_id=264934385]
@@ -284,6 +316,14 @@ metadata/_edit_group_ = true
 visible = false
 position = Vector2(706.11505, 379.40356)
 scale = Vector2(0.8683457, 1.1573403)
-sprite_frames = SubResource("SpriteFrames_3tf2g")
+sprite_frames = SubResource("SpriteFrames_vealc")
 animation = &"punch"
+metadata/_edit_group_ = true
+
+[node name="ult" type="AnimatedSprite2D" parent="Player2" unique_id=1218733187]
+visible = false
+position = Vector2(860.0504, 351.88727)
+scale = Vector2(0.16122647, 0.271769)
+sprite_frames = SubResource("SpriteFrames_xlnb1")
+animation = &"ult"
 metadata/_edit_group_ = true
