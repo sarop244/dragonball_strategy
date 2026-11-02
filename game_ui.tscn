@@ -13,26 +13,24 @@ script = ExtResource("1_ue6oa")
 [node name="P1_Panel" type="Control" parent="." unique_id=1282469435]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -1.0
-offset_top = 2.0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 41.0
+offset_bottom = 38.0
 
 [node name="KiLabel" type="Label" parent="P1_Panel" unique_id=1798481643]
 layout_mode = 0
 offset_left = 3.0
-offset_top = 58.0
+offset_top = 50.0
 offset_right = 116.0
-offset_bottom = 81.0
+offset_bottom = 73.0
 text = "플레이어 1"
 
 [node name="HpLabel" type="Label" parent="P1_Panel" unique_id=2017443494]
 layout_mode = 1
 anchors_preset = -1
 offset_left = 3.0
-offset_top = 125.0
+offset_top = 100.0
 offset_right = 43.0
-offset_bottom = 148.0
+offset_bottom = 123.0
 text = "1"
 
 [node name="charge" type="Button" parent="P1_Panel" unique_id=570013890]
@@ -43,6 +41,7 @@ offset_right = 115.0
 offset_bottom = 641.0
 scale = Vector2(0.05, 0.05)
 icon = ExtResource("2_obik5")
+metadata/_edit_group_ = true
 
 [node name="guard" type="Button" parent="P1_Panel" unique_id=1865513853]
 layout_mode = 0
@@ -52,6 +51,7 @@ offset_right = 2456.0
 offset_bottom = 2586.0
 scale = Vector2(0.05, 0.05)
 icon = ExtResource("3_xlnb1")
+metadata/_edit_group_ = true
 
 [node name="punch" type="Button" parent="P1_Panel" unique_id=1207940783]
 layout_mode = 0
@@ -61,6 +61,7 @@ offset_right = 2656.0
 offset_bottom = 2586.0
 scale = Vector2(0.05, 0.05)
 icon = ExtResource("4_vealc")
+metadata/_edit_group_ = true
 
 [node name="pa" type="Button" parent="P1_Panel" unique_id=1850714174]
 layout_mode = 0
@@ -70,6 +71,7 @@ offset_right = 2256.0
 offset_bottom = 2586.0
 scale = Vector2(0.05, 0.05)
 icon = ExtResource("5_ltg2s")
+metadata/_edit_group_ = true
 
 [node name="ult" type="Button" parent="P1_Panel" unique_id=1745238745]
 visible = false
@@ -84,50 +86,56 @@ icon = ExtResource("6_xlnb1")
 [node name="P2_Panel" type="Control" parent="." unique_id=1874409525]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 10.0
-offset_top = 99.0
-offset_right = 50.0
-offset_bottom = 139.0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="KiLabel" type="Label" parent="P2_Panel" unique_id=64573696]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 2.0170002
-anchor_right = 2.0170002
-offset_left = 956.32
-offset_top = -41.0
-offset_right = 1037.32
-offset_bottom = -12.0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 1031.0
+offset_top = 50.0
+offset_right = 1109.0
+offset_bottom = 73.0
+grow_horizontal = 0
 text = "플레이어 2"
+horizontal_alignment = 2
 
 [node name="HpLabel" type="Label" parent="P2_Panel" unique_id=1755683477]
-layout_mode = 0
-offset_left = 1042.0
-offset_top = 22.0
-offset_right = 1108.0
-offset_bottom = 45.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 1040.0
+offset_top = 100.0
+offset_right = 1106.0
+offset_bottom = 123.0
+grow_horizontal = 0
 text = "1"
-
-[node name="ActionButtons" type="Button" parent="P2_Panel" unique_id=711850545]
-layout_mode = 0
-offset_left = 28.0
-offset_top = -88.0
-offset_right = 97.0
-offset_bottom = -44.0
+horizontal_alignment = 2
 
 [node name="StatusLabel" type="Label" parent="." unique_id=1747686033]
-offset_left = 370.0
-offset_top = 23.0
-offset_right = 576.0
-offset_bottom = 46.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -103.0
+offset_top = 50.0
+offset_right = 103.0
+offset_bottom = 73.0
+grow_horizontal = 2
 text = "상태"
 horizontal_alignment = 1
 
 [node name="Restart" type="Button" parent="." unique_id=76083729]
-offset_left = 431.0
-offset_top = 76.0
-offset_right = 518.0
-offset_bottom = 141.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -43.5
+offset_top = 100.0
+offset_right = 43.5
+offset_bottom = 165.0
+grow_horizontal = 2
 theme_override_font_sizes/font_size = 22
 disabled = true
 text = "재시작"

@@ -58,9 +58,9 @@ func update_skill_buttons(ki: int) -> void:
 		$P1_Panel/ult.visible = false  # 울트라 버튼 숨기기
 		
 func display_result(data: Dictionary) -> void:
-	p1_ki_label.text = "기1: " + str(data.p1_ki)
+	p1_ki_label.text = "기: " + str(data.p1_ki)
 	p1_hp_label.text = "누적피해: " + str(data.p1_damage) + "/4"
-	p2_ki_label.text = "기2: " + str(data.p2_ki)
+	p2_ki_label.text = "기: " + str(data.p2_ki)
 	p2_hp_label.text = "누적피해: " + str(data.p2_damage) + "/4"
 	
 	update_skill_buttons(data.p1_ki)
