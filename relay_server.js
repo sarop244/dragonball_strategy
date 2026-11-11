@@ -25,7 +25,8 @@ server.on('connection', ws => {
       send(ws, {type:'joined', room:code, player:2}); send(room.players[0], {type:'opponent_joined'});
     } else if (msg.type === 'action') {
       const room = rooms.get(ws.roomCode), action = Number(msg.action);
-      if (!room || ![1,2,3,4,5].includes(action)) return;
+      if (!room || room.players.length !== 2) return send(ws, {type:"error", message:"상대가 들어올 때까지 기다려 주세요."});
+      if (![1,2,3,4,5].includes(action)) return;
       if (room.actions[ws.player] !== undefined) return send(ws, {type:'error', message:'이번 턴 행동을 이미 선택했습니다.'});
       room.actions[ws.player] = action;
       if (room.actions[1] !== undefined && room.actions[2] !== undefined) {
@@ -39,5 +40,7 @@ server.on('connection', ws => {
 server.on('listening', () => {
   console.log(`Dragon Ball room relay listening on ${server.address().port}`);
 });
+
+
 
 

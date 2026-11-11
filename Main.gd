@@ -13,17 +13,26 @@ func _ready() -> void:
 	network_client.name = "NetworkClient"
 	add_child(network_client)
 	network_client.connected_to_room.connect(_on_network_connected)
+	network_client.room_ready.connect(_on_network_room_ready)
 	network_client.turn_received.connect(_on_network_turn)
 	network_client.connection_status.connect(_on_network_status)
 	start_menu.network_requested.connect(_on_network_requested)
+func _set_action_buttons_enabled(enabled: bool) -> void:
+	for button_path in ["P1_Panel/charge", "P1_Panel/guard", "P1_Panel/punch", "P1_Panel/pa", "P1_Panel/ult"]:
+		var button := $GameUI.get_node(button_path) as Button
+		button.disabled = not enabled
 func _submit_action(action: GameManager.Action) -> void:
 	if game_manager.is_game_over: return
 	if online_mode:
+		if not network_client.opponent_ready:
+			ui.status_label.text = "상대가 방에 들어올 때까지 기다려 주세요."
+			return
 		if my_player_number == 0:
 			ui.status_label.text = "먼저 방에 연결하세요."
 			return
-		network_client.submit_action(action)
-		ui.status_label.text = "행동을 보냈습니다. 상대의 선택을 기다리는 중..."
+		if network_client.submit_action(action):
+			_set_action_buttons_enabled(false)
+			ui.status_label.text = "행동을 보냈습니다. 상대의 선택을 기다리는 중..."
 	else:
 		game_manager.receive_player_action(action)
 func _on_game_ui_charge_pressed() -> void:
@@ -53,6 +62,8 @@ func _on_game_manager_turn_processed(result_data: Dictionary) -> void:
 	p2.play_action_anim(result_data.p2_act)
 	if result_data.p1_dead: p1.play_dead_anim()
 	if result_data.p2_dead: p2.play_dead_anim()
+	if online_mode and not game_manager.is_game_over:
+		_set_action_buttons_enabled(network_client.opponent_ready)
 func _on_start_menu_mode_selected(is_multi: bool) -> void:
 	game_manager.is_multiplayer = is_multi
 	if not is_multi:
@@ -66,13 +77,22 @@ func _on_network_connected(player_number: int, room_code: String) -> void:
 	start_menu.set_room_code(room_code)
 	start_menu.hide()
 	ui.show()
-	ui.status_label.text = "방 %s · %dP로 연결됐습니다. 상대를 기다립니다." % [room_code, player_number]
 	$GameUI/P2_Panel.visible = false
 	$GameUI/P1_Panel/KiLabel.text = "내 기"
 	$GameUI/P1_Panel/HpLabel.text = "내 누적피해"
+	_set_action_buttons_enabled(network_client.opponent_ready)
+	if network_client.opponent_ready:
+		ui.status_label.text = "방 %s · 상대가 들어왔습니다. 행동을 선택하세요." % room_code
+	else:
+		ui.status_label.text = "방 코드: %s · 상대가 들어올 때까지 기다려 주세요." % room_code
+func _on_network_room_ready() -> void:
+	_set_action_buttons_enabled(true)
+	ui.status_label.text = "상대가 참가했습니다. 행동을 선택하세요."
 func _on_network_turn(p1_action: int, p2_action: int) -> void:
 	game_manager.process_turn(p1_action, p2_action)
 func _on_network_status(message: String) -> void:
+	if message.contains("상대 연결이 끊겼습니다"):
+		_set_action_buttons_enabled(false)
 	if is_instance_valid(start_menu) and start_menu.visible:
 		start_menu.set_status(message)
 	elif is_instance_valid(ui):
