@@ -68,11 +68,11 @@ func display_result(data: Dictionary) -> void:
 	if data.p1_dead or data.p2_dead:
 		$Restart.disabled = false
 	if data.p1_dead and data.p2_dead:
-		status_label.text = "💀 무승부!"
+		status_label.text = "무승부!"
 	elif data.p1_dead:
-		status_label.text = "🎉 2P 승리!"
+		status_label.text = "2P 승리!"
 	elif data.p2_dead:
-		status_label.text = "🎉 1P 승리!"
+		status_label.text = "1P 승리!"
 	else:
 		status_label.text = "턴 완료!"
 

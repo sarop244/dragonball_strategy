@@ -34,4 +34,3 @@ func set_status(message: String) -> void:
 	status_label.text = message
 func set_room_code(code: String) -> void:
 	room_input.text = code
-
