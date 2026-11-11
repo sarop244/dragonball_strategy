@@ -106,4 +106,3 @@ func _on_network_status(message: String) -> void:
 		start_menu.set_status(message)
 	elif is_instance_valid(ui):
 		ui.status_label.text = message
-

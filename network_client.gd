@@ -75,4 +75,3 @@ func close_connection() -> void:
 	active = false
 	opponent_ready = false
 	if socket.get_ready_state() != WebSocketPeer.STATE_CLOSED: socket.close()
-

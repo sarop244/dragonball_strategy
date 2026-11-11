@@ -92,4 +92,3 @@ func _on_ult_pressed() -> void:
 
 func _on_exit_pressed() -> void:
 	exit_pressed.emit()
-

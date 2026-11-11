@@ -140,7 +140,7 @@ theme_override_font_sizes/font_size = 22
 disabled = true
 text = "재시작"
 
-[node name="Exit" type="Button" parent="."]
+[node name="Exit" type="Button" parent="." unique_id=1540176663]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -152,11 +152,10 @@ grow_horizontal = 2
 theme_override_font_sizes/font_size = 22
 text = "나가기"
 
-[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="P1_Panel/charge" to="." method="_on_charge_pressed"]
 [connection signal="pressed" from="P1_Panel/guard" to="." method="_on_guard_pressed"]
 [connection signal="pressed" from="P1_Panel/punch" to="." method="_on_punch_pressed"]
 [connection signal="pressed" from="P1_Panel/pa" to="." method="_on_pa_pressed"]
 [connection signal="pressed" from="P1_Panel/ult" to="." method="_on_ult_pressed"]
 [connection signal="pressed" from="Restart" to="." method="_on_restart_pressed"]
-
+[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
