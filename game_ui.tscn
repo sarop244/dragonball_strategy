@@ -29,7 +29,7 @@ layout_mode = 1
 anchors_preset = -1
 offset_left = 3.0
 offset_top = 100.0
-offset_right = 43.0
+offset_right = 160.0
 offset_bottom = 123.0
 text = "1"
 
@@ -94,7 +94,7 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = 1031.0
+offset_left = 960.0
 offset_top = 50.0
 offset_right = 1109.0
 offset_bottom = 73.0
@@ -107,7 +107,7 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = 1040.0
+offset_left = 950.0
 offset_top = 100.0
 offset_right = 1106.0
 offset_bottom = 123.0
@@ -140,9 +140,23 @@ theme_override_font_sizes/font_size = 22
 disabled = true
 text = "재시작"
 
+[node name="Exit" type="Button" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 60.0
+offset_top = 100.0
+offset_right = 150.0
+offset_bottom = 165.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 22
+text = "나가기"
+
+[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="P1_Panel/charge" to="." method="_on_charge_pressed"]
 [connection signal="pressed" from="P1_Panel/guard" to="." method="_on_guard_pressed"]
 [connection signal="pressed" from="P1_Panel/punch" to="." method="_on_punch_pressed"]
 [connection signal="pressed" from="P1_Panel/pa" to="." method="_on_pa_pressed"]
 [connection signal="pressed" from="P1_Panel/ult" to="." method="_on_ult_pressed"]
 [connection signal="pressed" from="Restart" to="." method="_on_restart_pressed"]
+

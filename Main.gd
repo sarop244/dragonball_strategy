@@ -16,6 +16,7 @@ func _ready() -> void:
 	network_client.room_ready.connect(_on_network_room_ready)
 	network_client.turn_received.connect(_on_network_turn)
 	network_client.connection_status.connect(_on_network_status)
+	ui.exit_pressed.connect(_on_game_ui_exit_pressed)
 	start_menu.network_requested.connect(_on_network_requested)
 func _set_action_buttons_enabled(enabled: bool) -> void:
 	for button_path in ["P1_Panel/charge", "P1_Panel/guard", "P1_Panel/punch", "P1_Panel/pa", "P1_Panel/ult"]:
@@ -47,6 +48,9 @@ func _on_game_ui_pa_pressed() -> void:
 	else: ui.status_label.text = "'기'가 부족합니다! 다른 행동을 선택하세요."
 func _on_game_ui_ult_pressed() -> void:
 	_submit_action(GameManager.Action.KAMEHAMEHA)
+func _on_game_ui_exit_pressed() -> void:
+	if online_mode: network_client.close_connection()
+	get_tree().reload_current_scene()
 func _on_game_ui_restart_pressed() -> void:
 	if online_mode: network_client.close_connection()
 	get_tree().reload_current_scene()
@@ -57,6 +61,9 @@ func _on_game_manager_turn_processed(result_data: Dictionary) -> void:
 			var temp = view_data[pair[0]]
 			view_data[pair[0]] = view_data[pair[1]]
 			view_data[pair[1]] = temp
+	if online_mode:
+		view_data["p1_name"] = "내"
+		view_data["p2_name"] = "상대"
 	ui.display_result(view_data)
 	p1.play_action_anim(result_data.p1_act)
 	p2.play_action_anim(result_data.p2_act)
@@ -77,9 +84,11 @@ func _on_network_connected(player_number: int, room_code: String) -> void:
 	start_menu.set_room_code(room_code)
 	start_menu.hide()
 	ui.show()
-	$GameUI/P2_Panel.visible = false
+	$GameUI/P2_Panel.visible = true
 	$GameUI/P1_Panel/KiLabel.text = "내 기"
-	$GameUI/P1_Panel/HpLabel.text = "내 누적피해"
+	$GameUI/P1_Panel/HpLabel.text = "내 피해"
+	$GameUI/P2_Panel/KiLabel.text = "상대 기"
+	$GameUI/P2_Panel/HpLabel.text = "상대 피해"
 	_set_action_buttons_enabled(network_client.opponent_ready)
 	if network_client.opponent_ready:
 		ui.status_label.text = "방 %s · 상대가 들어왔습니다. 행동을 선택하세요." % room_code
@@ -97,3 +106,4 @@ func _on_network_status(message: String) -> void:
 		start_menu.set_status(message)
 	elif is_instance_valid(ui):
 		ui.status_label.text = message
+

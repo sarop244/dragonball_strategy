@@ -18,6 +18,13 @@ func connect_to_room(server_url: String, code: String, create_room: bool) -> voi
 	if not create_room and room_code.is_empty():
 		connection_status.emit("참가할 방 코드를 입력하세요.")
 		return
+	if active or socket.get_ready_state() != WebSocketPeer.STATE_CLOSED:
+		socket.close()
+	socket = WebSocketPeer.new()
+	active = false
+	opponent_ready = false
+	player_number = 0
+	pending_join.clear()
 	var err := socket.connect_to_url(server_url.strip_edges())
 	if err != OK:
 		connection_status.emit("서버 연결 실패: %s" % error_string(err))
@@ -68,3 +75,4 @@ func close_connection() -> void:
 	active = false
 	opponent_ready = false
 	if socket.get_ready_state() != WebSocketPeer.STATE_CLOSED: socket.close()
+

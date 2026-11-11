@@ -7,6 +7,7 @@ signal guard_pressed()
 signal punch_pressed()
 signal pa_pressed()
 signal restart_pressed()
+signal exit_pressed()
 signal ult_pressed()
 
 var p1_selected: GameManager.Action = GameManager.Action.NONE
@@ -58,10 +59,10 @@ func update_skill_buttons(ki: int) -> void:
 		$P1_Panel/ult.visible = false  # 울트라 버튼 숨기기
 		
 func display_result(data: Dictionary) -> void:
-	p1_ki_label.text = "기: " + str(data.p1_ki)
-	p1_hp_label.text = "누적피해: " + str(data.p1_damage) + "/4"
-	p2_ki_label.text = "기: " + str(data.p2_ki)
-	p2_hp_label.text = "누적피해: " + str(data.p2_damage) + "/4"
+	p1_ki_label.text = str(data.get("p1_name", "1P")) + " 기: " + str(data.p1_ki)
+	p1_hp_label.text = str(data.get("p1_name", "1P")) + " 피해: " + str(data.p1_damage) + "/4"
+	p2_ki_label.text = str(data.get("p2_name", "2P")) + " 기: " + str(data.p2_ki)
+	p2_hp_label.text = str(data.get("p2_name", "2P")) + " 피해: " + str(data.p2_damage) + "/4"
 	
 	update_skill_buttons(data.p1_ki)
 	
@@ -88,3 +89,7 @@ func _on_restart_pressed() -> void:
 	restart_pressed.emit()
 func _on_ult_pressed() -> void:
 	ult_pressed.emit()
+
+func _on_exit_pressed() -> void:
+	exit_pressed.emit()
+

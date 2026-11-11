@@ -14,7 +14,7 @@ server.on('connection', ws => {
     if (msg.type === 'create') {
       let code = String(msg.room || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 8);
       if (!code) code = Math.random().toString(36).slice(2, 6).toUpperCase();
-      if (rooms.has(code)) return send(ws, {type:'error', message:'이미 사용 중인 방 코드입니다.'});
+      if (rooms.has(code)) return send(ws, {type:'error', message:'이미 사용 중인 방 코드입니다. 기존 방에 들어가려면 방 참가를 누르세요.'});
       rooms.set(code, {players:[ws], actions:{}}); ws.roomCode = code; ws.player = 1;
       send(ws, {type:'joined', room:code, player:1});
     } else if (msg.type === 'join') {
@@ -40,7 +40,4 @@ server.on('connection', ws => {
 server.on('listening', () => {
   console.log(`Dragon Ball room relay listening on ${server.address().port}`);
 });
-
-
-
 
