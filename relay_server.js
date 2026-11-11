@@ -36,5 +36,8 @@ server.on('connection', ws => {
   });
   ws.on('close', () => leave(ws));
 });
-console.log(`Dragon Ball room relay listening on ${server.address().port}`);
+server.on('listening', () => {
+  console.log(`Dragon Ball room relay listening on ${server.address().port}`);
+});
+
 
