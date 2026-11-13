@@ -31,7 +31,6 @@ offset_left = 3.0
 offset_top = 100.0
 offset_right = 160.0
 offset_bottom = 123.0
-text = "1"
 
 [node name="charge" type="Button" parent="P1_Panel" unique_id=570013890]
 layout_mode = 0
@@ -112,7 +111,6 @@ offset_top = 100.0
 offset_right = 1106.0
 offset_bottom = 123.0
 grow_horizontal = 0
-text = "1"
 horizontal_alignment = 2
 
 [node name="StatusLabel" type="Label" parent="." unique_id=1747686033]
@@ -128,6 +126,7 @@ text = "상태"
 horizontal_alignment = 1
 
 [node name="Restart" type="Button" parent="." unique_id=76083729]
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5

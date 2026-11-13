@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dxjyjf1xncm4l" path="res://game_ui.tscn" id="3_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://bl6jkle28cr64" path="res://game_manager.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://bvv0kpw6cbivq" path="res://startmenu.tscn" id="5_lquwl"]
+[ext_resource type="PackedScene" uid="uid://cg0g57ou8a6yq" path="res://network_client.tscn" id="6_network_client"]
 
 [node name="Main" type="Node2D" unique_id=2018218906]
 script = ExtResource("1_ig7tw")
@@ -18,7 +19,10 @@ position = Vector2(3, 1)
 
 [node name="StartMenu" parent="." unique_id=2015511402 instance=ExtResource("5_lquwl")]
 
+[node name="NetworkClient" parent="." unique_id=167240055 instance=ExtResource("6_network_client")]
+
 [connection signal="charge_pressed" from="GameUI" to="." method="_on_game_ui_charge_pressed"]
+[connection signal="exit_pressed" from="GameUI" to="." method="_on_game_ui_exit_pressed"]
 [connection signal="guard_pressed" from="GameUI" to="." method="_on_game_ui_guard_pressed"]
 [connection signal="pa_pressed" from="GameUI" to="." method="_on_game_ui_pa_pressed"]
 [connection signal="punch_pressed" from="GameUI" to="." method="_on_game_ui_punch_pressed"]
@@ -26,3 +30,8 @@ position = Vector2(3, 1)
 [connection signal="ult_pressed" from="GameUI" to="." method="_on_game_ui_ult_pressed"]
 [connection signal="turn_processed" from="GameManager" to="." method="_on_game_manager_turn_processed"]
 [connection signal="mode_selected" from="StartMenu" to="." method="_on_start_menu_mode_selected"]
+[connection signal="network_requested" from="StartMenu" to="." method="_on_network_requested"]
+[connection signal="connected_to_room" from="NetworkClient" to="." method="_on_network_connected"]
+[connection signal="connection_status" from="NetworkClient" to="." method="_on_network_status"]
+[connection signal="room_ready" from="NetworkClient" to="." method="_on_network_room_ready"]
+[connection signal="turn_received" from="NetworkClient" to="." method="_on_network_turn"]

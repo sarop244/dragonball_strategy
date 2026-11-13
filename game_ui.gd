@@ -1,7 +1,8 @@
+# 버튼 입력과 경기 화면
 class_name GameUI
 extends CanvasLayer
 
-#signal turn_requested(p1_act: GameManager.Action, p2_act: GameManager.Action)
+# 버튼 신호
 signal charge_pressed()
 signal guard_pressed()
 signal punch_pressed()
@@ -10,6 +11,7 @@ signal restart_pressed()
 signal exit_pressed()
 signal ult_pressed()
 
+# 선택 행동과 상태 라벨
 var p1_selected: GameManager.Action = GameManager.Action.NONE
 var p2_selected: GameManager.Action = GameManager.Action.NONE
 
@@ -20,11 +22,11 @@ var p2_selected: GameManager.Action = GameManager.Action.NONE
 @onready var p2_hp_label: Label = $P2_Panel/HpLabel
 
 
+# 버튼 신호 연결: game_ui.tscn
 func _ready() -> void:
-	#$Restart.pressed.connect(_on_execute_pressed)
 	pass
 	
-# 버튼 클릭 시 호출
+# 버튼 입력
 func select_p1_action(act: GameManager.Action) -> void:
 	p1_selected = act
 	update_status_text()
@@ -35,21 +37,13 @@ func select_p2_action(act: GameManager.Action) -> void:
 
 
 
-#func _on_execute_pressed() -> void:
-	##if p1_selected == GameManager.Action.NONE or p2_selected == GameManager.Action.NONE:
-		##status_label.text = "양쪽 다 행동을 선택해야 합니다!"
-		##return
-	#
-	#turn_requested.emit(p1_selected, p2_selected)
-	#p1_selected = GameManager.Action.NONE
-	#p2_selected = GameManager.Action.NONE
-
 func update_status_text() -> void:
 	status_label.text = "1P: %s / 2P: %s 선택 중..." % [
 		GameManager.Action.keys()[p1_selected], 
 		GameManager.Action.keys()[p2_selected]
 	]
 
+# 기 수치별 기술 버튼
 func update_skill_buttons(ki: int) -> void:
 	if ki >= 3:
 		$P1_Panel/pa.visible = false   # 기가 3 이상이면 파 버튼 숨기기 (노드 이름이 다르면 수정하세요)
@@ -58,6 +52,7 @@ func update_skill_buttons(ki: int) -> void:
 		$P1_Panel/pa.visible = true    # 기가 3 미만이면 파 버튼 보이기
 		$P1_Panel/ult.visible = false  # 울트라 버튼 숨기기
 		
+# 기, 피해, 승패 표시
 func display_result(data: Dictionary) -> void:
 	p1_ki_label.text = str(data.get("p1_name", "1P")) + " 기: " + str(data.p1_ki)
 	p1_hp_label.text = str(data.get("p1_name", "1P")) + " 피해: " + str(data.p1_damage) + "/4"
@@ -68,6 +63,7 @@ func display_result(data: Dictionary) -> void:
 	
 	if data.p1_dead or data.p2_dead:
 		$Restart.disabled = false
+		$Restart.visible = true
 	if data.p1_dead and data.p2_dead:
 		status_label.text = "무승부!"
 	elif data.p1_dead:
@@ -77,6 +73,7 @@ func display_result(data: Dictionary) -> void:
 	else:
 		status_label.text = "턴 완료!"
 
+# 버튼 신호 전달
 func _on_charge_pressed() -> void:		#차지버튼 눌렀을때
 	charge_pressed.emit()
 func _on_guard_pressed() -> void:
@@ -90,5 +87,6 @@ func _on_restart_pressed() -> void:
 func _on_ult_pressed() -> void:
 	ult_pressed.emit()
 
+# 나가기 신호
 func _on_exit_pressed() -> void:
 	exit_pressed.emit()

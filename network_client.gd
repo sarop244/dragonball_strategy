@@ -1,15 +1,19 @@
+# 온라인 통신 처리
 extends Node
 class_name NetworkClient
+# 서버 이벤트 신호
 signal connected_to_room(player_number: int, room_code: String)
 signal room_ready()
 signal turn_received(p1_action: int, p2_action: int)
 signal connection_status(message: String)
+# 연결과 방 상태
 var socket := WebSocketPeer.new()
 var room_code := ""
 var player_number := 0
 var active := false
 var opponent_ready := false
 var pending_join: Dictionary = {}
+# 서버 연결과 방 입장
 func connect_to_room(server_url: String, code: String, create_room: bool) -> void:
 	if server_url.strip_edges().is_empty() or server_url.contains("YOUR-SERVER"):
 		connection_status.emit("서버 주소를 확인하세요.")
@@ -33,6 +37,7 @@ func connect_to_room(server_url: String, code: String, create_room: bool) -> voi
 	opponent_ready = false
 	pending_join = {"type": "create" if create_room else "join", "room": room_code}
 	set_process(true)
+# 연결 확인과 메시지 수신
 func _process(_delta: float) -> void:
 	if not active: return
 	socket.poll()
@@ -47,10 +52,12 @@ func _process(_delta: float) -> void:
 		active = false
 		opponent_ready = false
 		connection_status.emit("서버 연결이 끊겼습니다.")
+# 상대 입장 후 행동 전송
 func submit_action(action: int) -> bool:
 	if not opponent_ready or not active or socket.get_ready_state() != WebSocketPeer.STATE_OPEN:
 		return false
 	return socket.send_text(JSON.stringify({"type":"action", "action":action})) == OK
+# 서버 메시지 처리
 func _handle_message(data: Dictionary) -> void:
 	match data.get("type", ""):
 		"joined":
@@ -71,6 +78,7 @@ func _handle_message(data: Dictionary) -> void:
 				connection_status.emit("상대 연결이 끊겼습니다. 새 방을 만들어 주세요.")
 			else:
 				connection_status.emit(message)
+# WebSocket 연결 종료
 func close_connection() -> void:
 	active = false
 	opponent_ready = false

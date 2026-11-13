@@ -1,29 +1,31 @@
 class_name GameManager
 extends Node
 
+# 행동 종류와 네트워크 번호
 enum Action { NONE, CHARGE, PA, GUARD, PUNCH, KAMEHAMEHA }
 
-# false면 한 컴퓨터 2인용, true면 멀티
+# 온라인 모드 여부
 var is_multiplayer: bool = false 
 
-# 플레이어 상태 데이터
+# 플레이어별 기와 피해
 var p1_ki: int = 0
 var p1_damage: int = 0
 var p2_ki: int = 0
 var p2_damage: int = 0
 
-# 현재 입력을 받고 있는 플레이어 (1 또는 2)
+# 현재 입력 플레이어
 var current_input_player: int = 1
 var p1_action: Action = Action.NONE
 var p2_action: Action = Action.NONE
 
-# ➕ [추가] 게임이 끝났는지 확인하는 변수
+# 게임 종료 상태
 var is_game_over: bool = false
 
-# 턴 결과 반환용 시그널
+# 턴 결과 신호
 signal turn_processed(result_data: Dictionary)
 signal dead_restart()
 # 턴 연산 함수
+# 턴 계산
 func process_turn(p1_act: Action, p2_act: Action) -> void:
 	# 1. 자원 검증
 	p1_act = validate_action(p1_act, p1_ki)
@@ -62,6 +64,7 @@ func process_turn(p1_act: Action, p2_act: Action) -> void:
 	
 	turn_processed.emit(result)
 	
+# 로컬 입력과 턴 처리
 func receive_player_action(action: Action) -> void:
 	# 누적 피해가 4 이상이면(죽었으면) 입력 차단!
 	if is_game_over:
@@ -84,6 +87,7 @@ func receive_player_action(action: Action) -> void:
 		p1_action = Action.NONE
 		p2_action = Action.NONE
 
+# 행동 유효성 검사
 func validate_action(act: Action, ki: int) -> Action:
 	if act == Action.KAMEHAMEHA and ki < 3 and ki >0:
 		return Action.PA 
@@ -93,6 +97,7 @@ func validate_action(act: Action, ki: int) -> Action:
 		return Action.NONE
 	return act
 
+# 기 충전과 소모
 func update_ki(player: int, act: Action) -> void:
 	var change = 0
 	if act == Action.CHARGE: change = 1
@@ -102,6 +107,7 @@ func update_ki(player: int, act: Action) -> void:
 	if player == 1: p1_ki += change
 	else: p2_ki += change
 
+# 사망 판정
 func check_death(my_act: Action, opp_act: Action) -> bool:
 	if opp_act == Action.PA and my_act == Action.PA: return false
 	if opp_act == Action.KAMEHAMEHA and my_act == Action.KAMEHAMEHA: return false
