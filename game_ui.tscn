@@ -16,21 +16,29 @@ anchors_preset = 0
 offset_right = 41.0
 offset_bottom = 38.0
 
+[node name="PlayerLabel" type="Label" parent="P1_Panel"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 8.0
+offset_right = 160.0
+offset_bottom = 46.0
+theme_override_font_sizes/font_size = 28
+text = "1P"
 [node name="KiLabel" type="Label" parent="P1_Panel" unique_id=1798481643]
 layout_mode = 0
 offset_left = 3.0
-offset_top = 50.0
+offset_top = 54.0
 offset_right = 116.0
-offset_bottom = 73.0
-text = "플레이어 1"
+offset_bottom = 78.0
+text = "기: 0"
 
 [node name="HpLabel" type="Label" parent="P1_Panel" unique_id=2017443494]
 layout_mode = 1
 anchors_preset = -1
 offset_left = 3.0
-offset_top = 100.0
+offset_top = 84.0
 offset_right = 160.0
-offset_bottom = 123.0
+offset_bottom = 108.0
 
 [node name="charge" type="Button" parent="P1_Panel" unique_id=570013890]
 layout_mode = 0
@@ -88,17 +96,30 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="PlayerLabel" type="Label" parent="P2_Panel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 960.0
+offset_top = 8.0
+offset_right = 1109.0
+offset_bottom = 46.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 28
+text = "2P"
+horizontal_alignment = 2
 [node name="KiLabel" type="Label" parent="P2_Panel" unique_id=64573696]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = 960.0
-offset_top = 50.0
+offset_top = 54.0
 offset_right = 1109.0
-offset_bottom = 73.0
+offset_bottom = 78.0
 grow_horizontal = 0
-text = "플레이어 2"
+text = "기: 0"
 horizontal_alignment = 2
 
 [node name="HpLabel" type="Label" parent="P2_Panel" unique_id=1755683477]
@@ -107,9 +128,9 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = 950.0
-offset_top = 100.0
+offset_top = 84.0
 offset_right = 1106.0
-offset_bottom = 123.0
+offset_bottom = 108.0
 grow_horizontal = 0
 horizontal_alignment = 2
 
@@ -158,3 +179,4 @@ text = "나가기"
 [connection signal="pressed" from="P1_Panel/ult" to="." method="_on_ult_pressed"]
 [connection signal="pressed" from="Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
+

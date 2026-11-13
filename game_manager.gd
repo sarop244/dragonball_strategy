@@ -88,6 +88,16 @@ func receive_player_action(action: Action) -> void:
 		p2_action = Action.NONE
 
 # 행동 유효성 검사
+# 경기 상태 초기화
+func reset_game() -> void:
+	p1_ki = 0
+	p1_damage = 0
+	p2_ki = 0
+	p2_damage = 0
+	current_input_player = 1
+	p1_action = Action.NONE
+	p2_action = Action.NONE
+	is_game_over = false
 func validate_action(act: Action, ki: int) -> Action:
 	if act == Action.KAMEHAMEHA and ki < 3 and ki >0:
 		return Action.PA 

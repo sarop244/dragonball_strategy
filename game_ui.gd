@@ -54,10 +54,10 @@ func update_skill_buttons(ki: int) -> void:
 		
 # 기, 피해, 승패 표시
 func display_result(data: Dictionary) -> void:
-	p1_ki_label.text = str(data.get("p1_name", "1P")) + " 기: " + str(data.p1_ki)
-	p1_hp_label.text = str(data.get("p1_name", "1P")) + " 피해: " + str(data.p1_damage) + "/4"
-	p2_ki_label.text = str(data.get("p2_name", "2P")) + " 기: " + str(data.p2_ki)
-	p2_hp_label.text = str(data.get("p2_name", "2P")) + " 피해: " + str(data.p2_damage) + "/4"
+	p1_ki_label.text = "기: " + str(data.p1_ki)
+	p1_hp_label.text = "피해: " + str(data.p1_damage) + "/4"
+	p2_ki_label.text = "기: " + str(data.p2_ki)
+	p2_hp_label.text = "피해: " + str(data.p2_damage) + "/4"
 	
 	update_skill_buttons(data.p1_ki)
 	

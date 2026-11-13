@@ -30,6 +30,12 @@ server.on('connection', ws => {
       if (room.players.length !== 1) return send(ws, {type:'error', message:'방이 이미 꽉 찼습니다.'});
       room.players.push(ws); ws.roomCode = code; ws.player = 2;
       send(ws, {type:'joined', room:code, player:2}); send(room.players[0], {type:'opponent_joined'});
+    // 두 플레이어의 경기 초기화
+    } else if (msg.type === 'restart') {
+      const room = rooms.get(ws.roomCode);
+      if (!room || room.players.length !== 2) return;
+      room.actions = {};
+      room.players.forEach(player => send(player, {type:'restart'}));
     // 턴 행동 중계
     } else if (msg.type === 'action') {
       const room = rooms.get(ws.roomCode), action = Number(msg.action);
@@ -49,3 +55,4 @@ server.on('connection', ws => {
 server.on('listening', () => {
   console.log(`Dragon Ball room relay listening on ${server.address().port}`);
 });
+

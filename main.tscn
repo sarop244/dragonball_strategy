@@ -35,3 +35,5 @@ position = Vector2(3, 1)
 [connection signal="connection_status" from="NetworkClient" to="." method="_on_network_status"]
 [connection signal="room_ready" from="NetworkClient" to="." method="_on_network_room_ready"]
 [connection signal="turn_received" from="NetworkClient" to="." method="_on_network_turn"]
+[connection signal="restart_received" from="NetworkClient" to="." method="_on_network_restart"]
+

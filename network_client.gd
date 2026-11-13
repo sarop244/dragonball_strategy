@@ -5,6 +5,7 @@ class_name NetworkClient
 signal connected_to_room(player_number: int, room_code: String)
 signal room_ready()
 signal turn_received(p1_action: int, p2_action: int)
+signal restart_received()
 signal connection_status(message: String)
 # 연결과 방 상태
 var socket := WebSocketPeer.new()
@@ -71,6 +72,7 @@ func _handle_message(data: Dictionary) -> void:
 			opponent_ready = true
 			room_ready.emit()
 		"turn": turn_received.emit(int(data.get("p1", 0)), int(data.get("p2", 0)))
+		"restart": restart_received.emit()
 		"error":
 			var message := str(data.get("message", "연결 오류"))
 			if message.contains("상대 연결이 종료"):
@@ -79,6 +81,9 @@ func _handle_message(data: Dictionary) -> void:
 			else:
 				connection_status.emit(message)
 # WebSocket 연결 종료
+func request_restart() -> void:
+	if active and socket.get_ready_state() == WebSocketPeer.STATE_OPEN:
+		socket.send_text(JSON.stringify({"type": "restart"}))
 func close_connection() -> void:
 	active = false
 	opponent_ready = false

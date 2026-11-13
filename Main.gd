@@ -50,20 +50,26 @@ func _on_game_ui_exit_pressed() -> void:
 	if online_mode: network_client.close_connection()
 	get_tree().reload_current_scene()
 func _on_game_ui_restart_pressed() -> void:
-	if online_mode: network_client.close_connection()
-	get_tree().reload_current_scene()
+	if online_mode:
+		network_client.request_restart()
+	else:
+		_reset_round()
+func _reset_round() -> void:
+	game_manager.reset_game()
+	p1.show_only("idle")
+	p2.show_only("idle")
+	$GameUI/Restart.disabled = true
+	$GameUI/Restart.visible = false
+	$GameUI.display_result({"p1_ki": 0, "p1_damage": 0, "p1_dead": false, "p2_ki": 0, "p2_damage": 0, "p2_dead": false})
+	$GameUI/StatusLabel.text = "새 게임 시작!"
+	if online_mode:
+		_set_action_buttons_enabled(network_client.opponent_ready)
+func _on_network_restart() -> void:
+	_reset_round()
+
 # 턴 결과와 애니메이션
 func _on_game_manager_turn_processed(result_data: Dictionary) -> void:
-	var view_data := result_data.duplicate()
-	if online_mode and my_player_number == 2:
-		for pair in [["p1_ki", "p2_ki"], ["p1_damage", "p2_damage"], ["p1_dead", "p2_dead"], ["p1_act", "p2_act"]]:
-			var temp = view_data[pair[0]]
-			view_data[pair[0]] = view_data[pair[1]]
-			view_data[pair[1]] = temp
-	if online_mode:
-		view_data["p1_name"] = "1P"
-		view_data["p2_name"] = "2P"
-	ui.display_result(view_data)
+	ui.display_result(result_data)
 	p1.play_action_anim(result_data.p1_act)
 	p2.play_action_anim(result_data.p2_act)
 	if result_data.p1_dead: p1.play_dead_anim()
@@ -87,10 +93,6 @@ func _on_network_connected(player_number: int, room_code: String) -> void:
 	start_menu.hide()
 	ui.show()
 	$GameUI/P2_Panel.visible = true
-	$GameUI/P1_Panel/KiLabel.text = "1P 기"
-	$GameUI/P1_Panel/HpLabel.text = "1P 피해"
-	$GameUI/P2_Panel/KiLabel.text = "2P 기"
-	$GameUI/P2_Panel/HpLabel.text = "2P 피해"
 	_set_action_buttons_enabled(network_client.opponent_ready)
 	if network_client.opponent_ready:
 		ui.status_label.text = "방 %s · 상대가 들어왔습니다. 행동을 선택하세요." % room_code
