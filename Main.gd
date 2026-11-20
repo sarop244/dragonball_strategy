@@ -32,7 +32,9 @@ func _submit_action(action: GameManager.Action) -> void:
 			_set_action_buttons_enabled(false)
 			ui.status_label.text = "행동을 보냈습니다. 상대의 선택을 기다리는 중..."
 	else:
-		game_manager.receive_player_action(action)
+		game_manager.receive_player_action(action)		# 에네르기파 버튼이 서로 다른 기를 표현
+		var current_ki: int = game_manager.p2_ki if game_manager.current_input_player == 2 else game_manager.p1_ki
+		ui.update_skill_buttons(current_ki)
 func _on_game_ui_charge_pressed() -> void:
 	_submit_action(GameManager.Action.CHARGE)
 func _on_game_ui_guard_pressed() -> void:
@@ -69,7 +71,7 @@ func _on_network_restart() -> void:
 
 # 턴 결과와 애니메이션
 func _on_game_manager_turn_processed(result_data: Dictionary) -> void:
-	ui.display_result(result_data)
+	ui.display_result(result_data, my_player_number if online_mode else 1)
 	p1.play_action_anim(result_data.p1_act)
 	p2.play_action_anim(result_data.p2_act)
 	if result_data.p1_dead: p1.play_dead_anim()

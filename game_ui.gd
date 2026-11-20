@@ -43,7 +43,7 @@ func update_status_text() -> void:
 		GameManager.Action.keys()[p2_selected]
 	]
 
-# 기 수치별 기술 버튼
+# 현재 플레이어의 기에 맞춰 기술 버튼 변경
 func update_skill_buttons(ki: int) -> void:
 	if ki >= 3:
 		$P1_Panel/pa.visible = false   # 기가 3 이상이면 파 버튼 숨기기 (노드 이름이 다르면 수정하세요)
@@ -53,13 +53,14 @@ func update_skill_buttons(ki: int) -> void:
 		$P1_Panel/ult.visible = false  # 울트라 버튼 숨기기
 		
 # 기, 피해, 승패 표시
-func display_result(data: Dictionary) -> void:
+func display_result(data: Dictionary, controlled_player: int = 1) -> void:
 	p1_ki_label.text = "기: " + str(data.p1_ki)
 	p1_hp_label.text = "피해: " + str(data.p1_damage) + "/4"
 	p2_ki_label.text = "기: " + str(data.p2_ki)
 	p2_hp_label.text = "피해: " + str(data.p2_damage) + "/4"
 	
-	update_skill_buttons(data.p1_ki)
+	var controlled_ki: int = data.p2_ki if controlled_player == 2 else data.p1_ki
+	update_skill_buttons(controlled_ki)
 	
 	if data.p1_dead or data.p2_dead:
 		$Restart.disabled = false
